@@ -5,6 +5,46 @@
 
 PLATFORM="$(echo $OSTYPE | sed 's/[0-9]//g')"
 
+## Detect the profile file
+## Source: https://github.com/creationix/nvm
+detect_profile() {
+  if [ -n "${PROFILE}" ] && [ -f "${PROFILE}" ]; then
+    echo "${PROFILE}"
+    return
+  fi
+
+  local DETECTED_PROFILE
+  DETECTED_PROFILE=''
+  local SHELLTYPE
+  SHELLTYPE="$(basename "/$SHELL")"
+
+  if [ "$SHELLTYPE" = "bash" ]; then
+    if [ -f "$HOME/.bashrc" ]; then
+      DETECTED_PROFILE="$HOME/.bashrc"
+    elif [ -f "$HOME/.bash_profile" ]; then
+      DETECTED_PROFILE="$HOME/.bash_profile"
+    fi
+  elif [ "$SHELLTYPE" = "zsh" ]; then
+    DETECTED_PROFILE="$HOME/.zshrc"
+  fi
+
+  if [ -z "$DETECTED_PROFILE" ]; then
+    if [ -f "$HOME/.profile" ]; then
+      DETECTED_PROFILE="$HOME/.profile"
+    elif [ -f "$HOME/.bashrc" ]; then
+      DETECTED_PROFILE="$HOME/.bashrc"
+    elif [ -f "$HOME/.bash_profile" ]; then
+      DETECTED_PROFILE="$HOME/.bash_profile"
+    elif [ -f "$HOME/.zshrc" ]; then
+      DETECTED_PROFILE="$HOME/.zshrc"
+    fi
+  fi
+
+  if [ ! -z "$DETECTED_PROFILE" ]; then
+    echo "$DETECTED_PROFILE"
+  fi
+}
+
 ## tell windows users to screw off
 case $OSTYPE in
   linux*|darwin*) ;;
@@ -103,8 +143,9 @@ nvm install stable
 ## create aliases file
 if [ -z "$INSTALLED" ]; then
   echo "* Copying over aliases ..."
-cat >> ~/.bashrc << _EOF
+cat >> $(detect_profile) << _EOF
 ## for dotfiles
+alias rs="source $(detect_profile)"
 source ~/.dotfiles/.bashrc
 _EOF
 else
