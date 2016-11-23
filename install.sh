@@ -3,11 +3,7 @@
 ## installs the dotfiles part of this project ##
 ################################################
 
-## requries root privileges
-if [ "$UID" -ne "0" ]; then
-  echo "Error: requires root privileges."
-  exit 1
-fi
+PLATFORM="$(echo $OSTYPE | sed 's/[0-9]//g')"
 
 ## tell windows users to screw off
 case $OSTYPE in
@@ -18,8 +14,20 @@ case $OSTYPE in
     ;;
 esac
 
+## requries root privilege on linux
+if [[ "$PLATFORM" == "linux" && "$UID" -ne "0" ]]; then
+  echo "Error: requires root privileges on linux."
+  exit 1
+fi
+
+## deny root privilege on os x
+if [[ "$PLATFORM" == "darwin" && "$UID" == "0" ]]; then
+  echo "Error: do not run as root on OS X."
+  exit 1
+fi
+
 ## verify that homebrew is installed
-if [[ "$(echo $OSTYPE | sed 's/[0-9]//g')" == "darwin" && -z "$(which brew)" ]]; then
+if [[ "$PLATFORM" == "darwin" && -z "$(which brew)" ]]; then
   echo "* Installing homebrew ..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
