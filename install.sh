@@ -152,5 +152,9 @@ else
   echo "* Skipping aliases (upgrade = $INSTALLED)"
 fi
 
+## reload profile
+echo "* Reloading profile ..."
+source $(detect_profile)
+
 ## leave the dotfiles directory
 popd
