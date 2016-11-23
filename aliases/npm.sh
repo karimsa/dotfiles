@@ -1,0 +1,11 @@
+## awesome npm aliases
+
+alias n="npm"
+alias i="n i"
+alias is="i --save"
+alias id="i --save-dev"
+alias ig="i -g"
+alias u="n publish"
+alias nr="n run"
+alias ns="n start"
+alias nt="n test"

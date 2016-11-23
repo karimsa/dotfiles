@@ -1,0 +1,5 @@
+alias l="ls -CF"
+alias la="ls -a"
+alias ll="ls -l"
+alias l1="ls -1 | grep '\.' | rev | cut -d. -f1 | rev | uniq"
+alias 1="ls -1"
