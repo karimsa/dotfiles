@@ -34,3 +34,7 @@ or for OS X (*do not run as root on os x*):
     - libssl-dev (on linux)
     - mongodb
     - watchman (on os x)
+
+## License
+
+Licensed under the [MIT license](LICENSE.md).
