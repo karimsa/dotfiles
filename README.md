@@ -17,23 +17,14 @@ or for OS X (*do not run as root on os x*):
  - [aliases](aliases) for:
     - ls
     - git
-    - npm
+    - node
     - bower
     - ember
-    - react-native
     - swift
-    - misc
+    - ... and more.
  - [z](https://github.com/rupa/z): rapidly jump around in directories.
  - [custom bash prompt](utils/ps1.sh): includes custom character for the prompt, path, and Git branch name.
- - packages:
-    - homebrew (on os x)
-    - build-essential (on linux)
-    - carthage (on os x)
-    - curl
-    - git
-    - libssl-dev (on linux)
-    - mongodb
-    - watchman (on os x)
+ - [various packages](dependencies)
 
 ## License
 
