@@ -2,3 +2,4 @@ build-essential
 curl
 libssl-dev
 mongodb-org
+yarn
