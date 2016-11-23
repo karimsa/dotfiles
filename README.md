@@ -2,6 +2,10 @@
 
 Custom config for easier shell life.
 
+## Installation
+
+`curl -so- https://raw.githubusercontent.com/karimsa/dotfiles/master/install.sh | sudo bash`
+
 ## What's included
 
  - [aliases](aliases) for:
@@ -24,7 +28,3 @@ Custom config for easier shell life.
     - libssl-dev (on linux)
     - mongodb
     - watchman (on os x)
-
-## Installation
-
-`curl -so- https://raw.githubusercontent.com/karimsa/dotfiles/master/install.sh | sudo bash`
