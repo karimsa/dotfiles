@@ -156,5 +156,8 @@ fi
 echo "* Reloading profile ..."
 source $(detect_profile)
 
+## install npm dependencies
+ig $(cat dependencies/node)
+
 ## leave the dotfiles directory
 popd
