@@ -91,6 +91,15 @@ esac
 echo "* Installing zsh ..."
 curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
 
+## install nvm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+
+## load nvm
+source ~/.nvm/nvm.sh
+
+## install the latest stable node
+nvm install stable
+
 ## create aliases file
 if [ -z "$INSTALLED" ]; then
   echo "* Copying over aliases ..."

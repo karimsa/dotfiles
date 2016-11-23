@@ -12,3 +12,6 @@ done
 for i in ~/.dotfiles/utils/*.sh; do
     source $i
 done
+
+# set node to stable
+nvm use stable
