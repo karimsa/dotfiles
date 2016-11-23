@@ -4,7 +4,13 @@ Custom config for easier shell life.
 
 ## Installation
 
+To install on linux, run:
+
 `curl -so- https://raw.githubusercontent.com/karimsa/dotfiles/master/install.sh | sudo bash`
+
+or for OS X (*do not run as root on os x*):
+
+`curl -so- https://raw.githubusercontent.com/karimsa/dotfiles/master/install.sh | bash`
 
 ## What's included
 
