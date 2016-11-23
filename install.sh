@@ -77,7 +77,7 @@ echo "* Installing zsh ..."
 curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
 
 ## create aliases file
-if [ "$INSTALLED" -ne "" ]; then
+if [ -z "$INSTALLED" ]; then
 echo "* Copying over aliases ..."
 cat >> ~/.bash_aliases << _EOF
 ## for dotfiles
