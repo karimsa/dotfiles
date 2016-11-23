@@ -33,7 +33,11 @@ if [ -z "$(which git)" ]; then
   esac
 fi
 
+## check if this is an install or upgrade
+if [ -x ~/.dotfiles ]; then INSTALLED="true"; fi
+
 ## clone repository locally
+rm -rf ~/.dotfiles
 echo "* Cloning dotfiles locally ..."
 git clone https://github.com/karimsa/dotfiles ~/.dotfiles
 pushd ~/.dotfiles
@@ -73,8 +77,13 @@ echo "* Installing zsh ..."
 curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
 
 ## create aliases file
+if [ "$INSTALLED" -ne "" ]; then
 echo "* Copying over aliases ..."
-cat .bash_aliases >> ~/.bash_aliases
+cat >> ~/.bash_aliases << _EOF
+## for dotfiles
+source ~/.dotfiles/.bash_aliases
+_EOF
+fi
 
 ## leave the dotfiles directory
 popd
