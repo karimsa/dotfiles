@@ -32,6 +32,13 @@ if [[ "$PLATFORM" == "darwin" && -z "$(which brew)" ]]; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+## update package manager
+echo "* Upgrading packages ..."
+case $OSTYPE in
+  linux*) apt-get update && apt-get upgrade -y ;;
+  darwin*) brew update && brew upgrade ;;
+esac
+
 ## verify that git is installed
 if [ -z "$(which git)" ]; then
   echo "* Installing git ..."
@@ -86,7 +93,7 @@ curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
 
 ## create aliases file
 if [ -z "$INSTALLED" ]; then
-echo "* Copying over aliases ..."
+  echo "* Copying over aliases ..."
 cat >> ~/.bash_aliases << _EOF
 ## for dotfiles
 source ~/.dotfiles/.bash_aliases
