@@ -135,7 +135,7 @@ curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
 curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
 ## load nvm
-source ~/.nvm/nvm.sh
+source /usr/local/nvm/nvm.sh
 
 ## install the latest stable node
 nvm install stable
