@@ -1,7 +1,7 @@
 ## awesome yarn aliases
 
 alias n="yarn"
-alias i="n i"
+alias i="n install"
 alias is="n add"
 alias id="is -D"
 alias ig="n global add"
