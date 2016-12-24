@@ -12,6 +12,8 @@ or for OS X (*do not run as root on os x*):
 
 `curl -so- https://raw.githubusercontent.com/karimsa/dotfiles/master/install.sh | bash`
 
+To upgrade an existing installation, run `.`.
+
 ## What's included
 
  - [aliases](aliases) for:
