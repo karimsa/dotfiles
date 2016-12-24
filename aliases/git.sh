@@ -1,4 +1,5 @@
 alias g="git"
+alias f="g clone"
 alias p="g push"
 alias y="g pull"
 alias d="g diff"
