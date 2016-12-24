@@ -127,18 +127,22 @@ case $OSTYPE in
     ;;
 esac
 
-## install z
-echo "* Installing zsh ..."
-curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
+if [ -z "$INSTALLED" ]; then
+  ## install z
+  curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
 
-## install nvm
-curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+  ## install nvm
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
-## load nvm
-source /usr/local/nvm/nvm.sh
+  ## load nvm
+  source /usr/local/nvm/nvm.sh
+fi
 
 ## install the latest stable node
 nvm install stable
+
+## install latest lts node
+nvm install --lts stable
 
 ## create aliases file
 if [ -z "$INSTALLED" ]; then
