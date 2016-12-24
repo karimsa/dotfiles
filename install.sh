@@ -122,7 +122,18 @@ case $OSTYPE in
       ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    # install all dependencies from the list
+    # fix permissions, in case
+    # from: https://gist.github.com/isaacs/579814#file-take-ownership-sh
+    sudo mkdir -p /usr/local/{share/man,bin,lib/node,include/node}
+    sudo chown -R $USER /usr/local/{share/man,bin,lib/node,include/node}
+
+    # install node first, for yarn to be satisfied
+    brew install node
+
+    # fix node for yarn
+    brew link --overwrite node
+
+    # install rest of dependencies from the list
     brew install $(cat dependencies/brew)
     ;;
 esac
