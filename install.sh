@@ -66,6 +66,10 @@ if [[ "$PLATFORM" == "darwin" && "$UID" == "0" ]]; then
   exit 1
 fi
 
+## load environment
+echo "* Loading environment ..."
+source $(detect_profile)
+
 ## verify that homebrew is installed
 if [[ "$PLATFORM" == "darwin" && -z "$(which brew)" ]]; then
   echo "* Installing homebrew ..."
@@ -117,11 +121,6 @@ case $OSTYPE in
     ;;
 
   darwin*)
-    # verify that homebrew is installed
-    if [ -z "$(which brew)" ]; then
-      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-
     # fix permissions, in case
     # from: https://gist.github.com/isaacs/579814#file-take-ownership-sh
     sudo mkdir -p /usr/local/{share/man,bin,lib/node,include/node}
@@ -138,7 +137,7 @@ case $OSTYPE in
     ;;
 esac
 
-if [ -z "$INSTALLED" ]; then
+if [ -z "$INSTALLED" ]; then :; else
   ## install z
   curl -so ~/.zsh https://raw.githubusercontent.com/rupa/z/master/z.sh
 
@@ -156,7 +155,7 @@ nvm install stable
 nvm install --lts stable
 
 ## create aliases file
-if [ -z "$INSTALLED" ]; then
+if [ -z "$INSTALLED" ]; then :; else
   echo "* Copying over aliases ..."
 cat >> $(detect_profile) << _EOF
 ## for dotfiles
