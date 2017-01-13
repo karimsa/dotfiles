@@ -173,5 +173,8 @@ source $(detect_profile)
 ## install npm dependencies
 ig $(cat dependencies/node)
 
+## generate ssh key
+ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+
 ## leave the dotfiles directory
 popd
