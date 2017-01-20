@@ -126,12 +126,6 @@ case $OSTYPE in
     sudo mkdir -p /usr/local/{share/man,bin,lib/node,include/node}
     sudo chown -R $USER /usr/local/{share/man,bin,lib/node,include/node}
 
-    # install node first, for yarn to be satisfied
-    brew install node
-
-    # fix node for yarn
-    brew link --overwrite node
-
     # install rest of dependencies from the list
     brew install $(cat dependencies/brew)
     ;;
