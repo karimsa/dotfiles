@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# load z
-source ~/.zsh
-
 # load all aliases
 for i in ~/.dotfiles/aliases/*.sh; do
     source $i
