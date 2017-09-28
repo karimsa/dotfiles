@@ -154,7 +154,7 @@ if [ -z "$INSTALLED" ]; then :; else
 cat >> $(detect_profile) << _EOF
 ## for dotfiles
 alias rs="source $(detect_profile)"
-source ~/.dotfiles/.bashrc
+source ~/.dotfiles/.rc
 _EOF
 else
   echo "* Skipping aliases (upgrade = $INSTALLED)"
