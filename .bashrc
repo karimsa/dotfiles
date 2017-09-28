@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH="$PATH:$HOME/.dotfiles/bin"
+
 # load all aliases
 for i in ~/.dotfiles/aliases/*.sh; do
     source $i
