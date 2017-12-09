@@ -2,4 +2,3 @@
 
 export PATH="$PATH:$HOME/.dotfiles/bin"
 for i in ~/.dotfiles/aliases/*.sh; do source $i; done
-nvm use stable

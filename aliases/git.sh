@@ -12,3 +12,8 @@ alias po="p origin"
 alias yo="y origin"
 alias pm="po \$(git rev-parse --abbrev-ref HEAD)"
 alias ym="yo \$(git rev-parse --abbrev-ref HEAD)"
+
+yk () {
+  git clone git@github.com:${1}.git ${2}
+}
+

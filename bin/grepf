@@ -6,8 +6,8 @@ txt="$1"
 
 for i in $(find $dirs -name "$pttn")
 do
-  if grep "$txt" $i &>/dev/null; then
-    echo "$i:"
-    cat -n $i | grep --color=always "$txt"
+  if egrep "$txt" $i &>/dev/null; then
+    echo "./$i:"
+    cat -n $i | egrep --color=always "$txt"
   fi
 done
