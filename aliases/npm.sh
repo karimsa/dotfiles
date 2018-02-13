@@ -1,9 +1,10 @@
 alias n="npm"
 alias i="n install"
-alias is="i --save"
+alias is="i"
 alias id="i --save-dev"
 alias ig="i -g"
 alias u="n publish"
 alias nr="n run"
 alias ns="n start"
 alias nt="n test"
+
