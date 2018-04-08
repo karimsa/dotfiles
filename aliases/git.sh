@@ -16,6 +16,8 @@ alias yo="y origin"
 alias pm="ym && po \$(git rev-parse --abbrev-ref HEAD)"
 alias ym="yo \$(git rev-parse --abbrev-ref HEAD)"
 alias idk="ac '¯\_(ツ)_/¯' && ym && pm"
+
+# https://stackoverflow.com/a/10312587
 alias gfetch="git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done"
 
 yk () {
