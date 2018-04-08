@@ -16,6 +16,7 @@ alias yo="y origin"
 alias pm="ym && po \$(git rev-parse --abbrev-ref HEAD)"
 alias ym="yo \$(git rev-parse --abbrev-ref HEAD)"
 alias idk="ac '¯\_(ツ)_/¯' && ym && pm"
+alias gfetch="git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done"
 
 yk () {
   git clone git@github.com:${1}.git ${2}
