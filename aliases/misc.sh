@@ -8,3 +8,5 @@ alias ....="..;..;.."
 alias flushdns="sudo dscacheutil -flushcache ; sudo killall -HUP mDNSResponder"
 alias mute="osascript -e 'set volume output muted true'"
 alias unmute="osascript -e 'set volume output muted false'"
+alias nstat="netstat -tulnp"
+
