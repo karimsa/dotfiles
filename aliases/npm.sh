@@ -7,4 +7,5 @@ alias u="n publish"
 alias nr="n run"
 alias ns="n start"
 alias nt="n test"
+alias nb="nr build"
 
