@@ -15,6 +15,7 @@ alias mb="m -b"
 alias po="p origin"
 alias yo="y origin"
 alias pm="po \$(git rev-parse --abbrev-ref HEAD)"
+alias pmf="pm --force-with-lease"
 alias ym="yo \$(git rev-parse --abbrev-ref HEAD)"
 alias idk="ac '¯\_(ツ)_/¯' && ym && pm"
 
