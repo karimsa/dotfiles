@@ -1,14 +1,22 @@
-alias o="open"
-alias k="killall"
+## Make it easier to dangerously delete files permenantly
 alias rf="rm -rf"
-alias rs="source ~/.bash_profile;source ~/.bashrc;source ~/.bash_aliases"
+
+## Maximum laziness
 alias ..="cd .."
 alias ...="..;.."
 alias ....="..;..;.."
+
+## Networking
 alias flushdns="sudo dscacheutil -flushcache ; sudo killall -HUP mDNSResponder"
+alias nstat="netstat -tulnp"
+
+## Volume control
 alias mute="osascript -e 'set volume output muted true'"
 alias unmute="osascript -e 'set volume output muted false'"
-alias nstat="netstat -tulnp"
+
+## Restarts bluetooth driver on macOS
+## Source: https://gist.github.com/nicolasembleton/afc19940da26716f8e90
+alias restartbt="sudo kextunload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport && sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport"
 
 function bw() {
   if test -z "$1" || test -z "$2"; then
