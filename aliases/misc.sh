@@ -16,7 +16,7 @@ alias unmute="osascript -e 'set volume output muted false'"
 
 ## Restarts bluetooth driver on macOS
 ## Source: https://gist.github.com/nicolasembleton/afc19940da26716f8e90
-alias restartbt="sudo kextunload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport && sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport"
+alias restartbt="sudo kextunload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport ; sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport"
 
 function bw() {
   if test -z "$1" || test -z "$2"; then
