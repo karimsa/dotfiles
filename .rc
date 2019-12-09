@@ -6,6 +6,9 @@ export PATH="$PATH:$HOME/.dotfiles/bin"
 # make all locally installed modules available
 export PATH="$PATH:./node_modules/.bin"
 
+# make all monorepo packages available
+export PATH="$PATH:../../node_modules/.bin"
+
 # load simple aliases
 for i in ~/.dotfiles/aliases/*.sh; do
   source $i
