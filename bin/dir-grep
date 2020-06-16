@@ -1,0 +1,74 @@
+#!/bin/bash
+set -eo pipefail
+
+if test "$DEBUG" = "`basename $0`"; then
+	set -x
+fi
+
+function show_usage() {
+	echo -e "usage: `basename $0` [query] [directory] [OPTIONS] -- [GREP OPTIONS]"
+	echo -e "Runs grep over several files."
+	echo -e ""
+	echo -e "\tquery\tgrep-formatted query"
+	echo -e "\tdirectory\tpath to the directory where the files exist (default: '.')"
+	echo -e ""
+	echo -e "Options:"
+	echo -e ""
+	echo -e "\t--ext, -e [file exts]\tglob to match file patterns (passed to \`find\`) (default: '*')"
+	echo -e ""
+	echo -e "After '--', all options are passed unparsed to grep. This also forcefully overrides the default grep flags (E, i, colors=always)"
+	echo -e ""
+	exit 1
+}
+
+txt="$1"
+if ! shift || test -z "$txt"; then
+	show_usage
+fi
+
+targetDir="."
+filePattern="*"
+grepFlags="-E -i --color=always"
+while test "$#" -gt "0"; do
+	case "$1" in
+		--help|-h)
+			shift
+			show_usage
+			;;
+
+		--ext|-e)
+			shift
+			filePattern="$1"
+			shift || show_usage
+			;;
+
+		*)
+			targetDir="$targetDir $1"
+			shift
+			;;
+
+		--)
+			shift
+
+			grepFlags=""
+			while test "$#" -gt "0"; do
+				grepFlags="$grepFlags $1"
+				shift
+			done
+			;;
+	esac
+done
+
+# validate pattern + flags
+echo '.' | grep $grepFlags . >/dev/null
+
+# visit all relevant files
+for i in $(find $targetDir -name "$filePattern" -type f); do
+	tmp="`mktemp`"
+	if cat -n $i | grep $grepFlags "$txt" > "$tmp"; then
+		echo "./$i:"
+		cat $tmp
+		echo ""
+	fi
+done
+
