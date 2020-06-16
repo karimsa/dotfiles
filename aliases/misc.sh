@@ -9,6 +9,7 @@ alias ....="..;..;.."
 ## Networking
 alias flushdns="sudo dscacheutil -flushcache ; sudo killall -HUP mDNSResponder"
 alias nstat="netstat -tulnp"
+alias whatsmyip="curl -fsSL https://api.ipify.org\?format\=text && echo ''"
 
 ## Volume control
 alias mute="osascript -e 'set volume output muted true'"
