@@ -21,12 +21,8 @@ function show_usage() {
 	exit 1
 }
 
-txt="$1"
-if ! shift || test -z "$txt"; then
-	show_usage
-fi
-
-targetDir="."
+text=""
+targetDir=""
 filePattern="*"
 grepFlags="-E -i --color=always"
 while test "$#" -gt "0"; do
@@ -42,33 +38,67 @@ while test "$#" -gt "0"; do
 			shift || show_usage
 			;;
 
-		*)
-			targetDir="$targetDir $1"
-			shift
-			;;
-
 		--)
 			shift
-
 			grepFlags=""
 			while test "$#" -gt "0"; do
 				grepFlags="$grepFlags $1"
 				shift
 			done
 			;;
+
+		-*)
+			echo "Unknown flag: $1"
+			show_usage
+			;;
+
+		*)
+			if test -z "$text"; then
+				text="$1"
+			elif test -z "$targetDir"; then
+				targetDir="$1"
+			else
+				echo "Unexpected arg: $1"
+				show_usage
+			fi
+			shift
+			;;
 	esac
 done
+
+if test -z "$text"; then
+	echo "Search pattern is required."
+	show_usage
+fi
+if test -z "$targetDir"; then
+	targetDir="."
+fi
 
 # validate pattern + flags
 echo '.' | grep $grepFlags . >/dev/null
 
 # visit all relevant files
+echo ""
 for i in $(find $targetDir -name "$filePattern" -type f); do
 	tmp="`mktemp`"
-	if cat -n $i | grep $grepFlags "$txt" > "$tmp"; then
-		echo "./$i:"
+
+	echo -en "\r"
+	tput el
+	echo -en "\r${i:0:100}"
+	if ! test -z "${i:101}"; then
+		echo -n "..."
+	fi
+
+	if cat -n $i | grep $grepFlags "$text" > "$tmp"; then
+		echo -en "\r"
+		tput el
+
+		echo "$i:"
 		cat $tmp
 		echo ""
 	fi
 done
+
+echo -en "\r"
+tput el
 
