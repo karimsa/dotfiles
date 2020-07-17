@@ -1,0 +1,67 @@
+#!/bin/bash
+set -e
+
+function show_usage() {
+	echo -e "usage: $0 [OPTIONS]"
+	echo -e "Squash multiple commits into one."
+	echo -e ""
+	echo -e "Options:"
+	echo -e "\t-c, --count [number]\tNumber of commits to squash (default: 2)"
+	echo -e "\t-m, --message [text]\tIf provided, the message of the squashed commit will be set to this."
+	echo -e "\t-d, --dryRun\tdo a dry run, no changes will be made"
+	echo -e ""
+	exit 1
+}
+
+num="2"
+message=""
+dryRun="false"
+rebaseFile=""
+
+while test "$#" -gt "0"; do
+	case "$1" in
+		-c|--count)
+			shift
+			num="$1"
+			shift || (echo "Missing number for --count"; show_usage)
+			;;
+
+		-m|--message)
+			shift
+			message="$1"
+			shift || (echo "Missing text for --message"; show_usage)
+			;;
+
+		-d|--dryRun)
+			shift
+			dryRun="true"
+			;;
+
+		--rebase)
+			shift
+			read fd
+			rebaseFile="$fd"
+			;;
+
+		*)
+			echo "Unexpected option: $1"
+			show_usage
+			;;
+	esac
+done
+
+if test -z "$message"; then
+	message=`git log --oneline | head -n $num | tail -n 1 | cut -d\  -f2-`
+fi
+
+if test "$dryRun" = "true"; then
+	first="`git log --oneline | head -n 1 | cut -d\  -f1`"
+	last="`git log --oneline | head -n $num | tail -n 1 | cut -d\  -f1`"
+
+	echo "Squash message: '$message'"
+	echo "Will squash commits $first..$last"
+	exit
+fi
+
+git reset --soft HEAD~$num
+git commit -m "$message"
