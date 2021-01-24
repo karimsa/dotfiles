@@ -6,6 +6,15 @@ alias ..="cd .."
 alias ...="..;.."
 alias ....="..;..;.."
 
+## Properly clear when using tmux
+clearBin=`which clear`
+function clear() {
+	$clearBin
+	if ! test -z "$TMUX"; then
+		tmux clear-history
+	fi
+}
+
 ## Networking
 alias flushdns="sudo dscacheutil -flushcache ; sudo killall -HUP mDNSResponder"
 alias nstat="netstat -tulnp"
