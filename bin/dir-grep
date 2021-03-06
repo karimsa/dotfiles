@@ -79,7 +79,7 @@ echo '.' | grep $grepFlags . >/dev/null
 
 # visit all relevant files
 echo ""
-for i in $(find $targetDir -name "$filePattern" -type f); do
+find $targetDir -name "$filePattern" -type f | while read i; do
 	tmp="`mktemp`"
 
 	echo -en "\r"
@@ -89,12 +89,12 @@ for i in $(find $targetDir -name "$filePattern" -type f); do
 		echo -n "..."
 	fi
 
-	if cat -n $i | grep $grepFlags "$text" > "$tmp"; then
+	if cat -n "$i" | grep $grepFlags "$text" > "$tmp"; then
 		echo -en "\r"
 		tput el
 
 		echo "$i:"
-		cat $tmp
+		cat "$tmp"
 		echo ""
 	fi
 done
