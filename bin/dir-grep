@@ -25,6 +25,7 @@ text=""
 targetDir=""
 filePattern="*"
 grepFlags="-E -i --color=always"
+showNamesOnly="false"
 while test "$#" -gt "0"; do
 	case "$1" in
 		--help|-h)
@@ -36,6 +37,11 @@ while test "$#" -gt "0"; do
 			shift
 			filePattern="$1"
 			shift || show_usage
+			;;
+
+		--name-only)
+			shift
+			showNamesOnly="true"
 			;;
 
 		--)
@@ -93,9 +99,13 @@ find $targetDir -name "$filePattern" -type f | while read i; do
 		echo -en "\r"
 		tput el
 
-		echo "$i:"
-		cat "$tmp"
-		echo ""
+		if test "$showNamesOnly" = "true"; then
+			echo "$i"
+		else
+			echo "$i:"
+			cat "$tmp"
+			echo ""
+		fi
 	fi
 done
 
