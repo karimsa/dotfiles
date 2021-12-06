@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -e
 
 function show_usage() {
 	echo -e "usage: $0 [OPTIONS]"
@@ -50,8 +50,19 @@ while test "$#" -gt "0"; do
 	esac
 done
 
+didStash="false"
+if ! test -z "`git diff --shortstat 2> /dev/null | tail -n1`"; then
+	echo "Git state is dirty, stashing"
+	git stash save
+	didStash="true"
+fi
+
 if test -z "$message"; then
 	message=`git log --oneline | head -n $num | tail -n 1 | cut -d\  -f2-`
+fi
+if test -z "$message"; then
+	echo "failed to set message" >&2
+	exit 1
 fi
 
 first="`git log --oneline | head -n 1 | cut -d\  -f1`"
@@ -60,6 +71,10 @@ last="`git log --oneline | head -n $num | tail -n 1 | cut -d\  -f1`"
 echo "Squash message: '$message'"
 echo "Squashing ${num} commits ($first..$last):"
 echo -e "\n`git log --oneline | head -n $num`\n"
+
+if test "$didStash" = "true"; then
+	git stash pop
+fi
 
 if test "$dryRun" = "true"; then
 	echo "(Skipping for dry-run)"
