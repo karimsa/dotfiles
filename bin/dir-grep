@@ -85,7 +85,7 @@ echo '.' | grep $grepFlags . >/dev/null
 
 # visit all relevant files
 echo ""
-find $targetDir -name "$filePattern" -type f | while read i; do
+find "$targetDir" -name "$filePattern" -type f | while read i; do
 	tmp="`mktemp`"
 
 	echo -en "\r"
