@@ -1,6 +1,5 @@
 set number
 set cursorline
-syntax on
 set autochdir
 set ignorecase
 set hlsearch incsearch " highlighting when using find
