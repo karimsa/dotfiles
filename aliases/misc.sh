@@ -36,3 +36,7 @@ function bw() {
   awk "/$1/{flag=1;next}/$2/{flag=0}flag"
 }
 
+function strip-ansi() {
+    sed -u 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g'
+}
+
