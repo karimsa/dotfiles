@@ -30,13 +30,6 @@ if [[ "$PLATFORM" == "darwin" && -z "$(which brew)" ]]; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-## update package manager
-echo "* Upgrading packages ..."
-case $OSTYPE in
-  linux*) apt-get update && apt-get upgrade -y ;;
-  darwin*) brew update && brew upgrade ;;
-esac
-
 ## verify that git is installed
 if [ -z "$(which git)" ]; then
   echo "* Installing git ..."
