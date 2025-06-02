@@ -46,14 +46,14 @@ if [ -z "$(which git)" ]; then
   esac
 fi
 
-## check if this is an install or upgrade
-if [ -x ~/.dotfiles ]; then INSTALLED="true"; fi
-
 ## clone repository locally
-rm -rf ~/.dotfiles
-echo "* Cloning dotfiles locally ..."
-git clone https://github.com/karimsa/dotfiles ~/.dotfiles
-pushd ~/.dotfiles
+if [ -x ~/.dotfiles ]; then
+  pushd ~/.dotfiles
+  git pull origin master
+else
+  git clone https://github.com/karimsa/dotfiles ~/.dotfiles
+  pushd ~/.dotfiles
+fi
 
 ## dependency installation
 echo "* Installing dependencies ..."
@@ -66,29 +66,33 @@ case $OSTYPE in
 esac
 
 ## Node
-curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+if ! which node &>/dev/null; then
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
-nvm install stable
-nvm install --lts stable
+  nvm install stable
+  nvm install --lts stable
+fi
 
 ## create aliases file
-if [ -z "$INSTALLED" ]; then :; else
+if ! grep 'dotfiles' ~/.zshrc &>/dev/null; then
   echo "* Copying over aliases ..."
 cat >> ~/.zshrc << _EOF
 ## for dotfiles
 alias rs="source ~/.zshrc"
 source ~/.dotfiles/.rc
 _EOF
-else
-  echo "* Skipping aliases (upgrade = $INSTALLED)"
 fi
 
 # Link vimrc to source from ~/.dotfiles/.vimrc
+if ! grep 'dotfiles' ~/.vimrc &>/dev/null; then
 cat >> ~/.vimrc << _EOF
-source ~/.dotfiles/.vimrc
+  source ~/.dotfiles/.vimrc
 _EOF
+fi
 
 # Link tmux.conf to source from ~/.dotfiles/.tmux.conf
+if ! grep 'dotfiles' ~/.tmux.conf &>/dev/null; then
 cat >> ~/.tmux.conf << _EOF
-source ~/.dotfiles/.tmux.conf
+  source ~/.dotfiles/.tmux.conf
 _EOF
+fi
