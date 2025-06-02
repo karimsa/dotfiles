@@ -44,7 +44,7 @@ if [ -x ~/.dotfiles ]; then
   pushd ~/.dotfiles
   git pull origin master
 else
-  git clone https://github.com/karimsa/dotfiles ~/.dotfiles
+  git clone git@github.com:karimsa/dotfiles.git ~/.dotfiles
   pushd ~/.dotfiles
 fi
 
