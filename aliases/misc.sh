@@ -1,6 +1,3 @@
-## Make it easier to dangerously delete files permenantly
-alias rf="rm -rf"
-
 ## Maximum laziness
 alias ..="cd .."
 alias ...="..;.."
