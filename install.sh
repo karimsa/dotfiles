@@ -82,3 +82,13 @@ _EOF
 else
   echo "* Skipping aliases (upgrade = $INSTALLED)"
 fi
+
+# Link vimrc to source from ~/.dotfiles/.vimrc
+cat >> ~/.vimrc << _EOF
+source ~/.dotfiles/.vimrc
+_EOF
+
+# Link tmux.conf to source from ~/.dotfiles/.tmux.conf
+cat >> ~/.tmux.conf << _EOF
+source ~/.dotfiles/.tmux.conf
+_EOF
