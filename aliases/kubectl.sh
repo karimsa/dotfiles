@@ -7,15 +7,22 @@ alias kdev="kubectx core-dev"
 alias kcare="kubens carejourney"
 alias kpods="kubectl get pods"
 
+alias kpickpod="k get pods -o json | jq '.items[].metadata.name' -r | fzf"
+
+kpickcontainer() {
+	k get pod "${1}" -o json | jq '.spec.containers[].name' -r | fzf --select-1
+}
+
 kexec() {
 	local pod
+	local container
 
-	pod=`k get pods -o json | jq '.items[].metadata.name' -r | fzf`
+	pod=`kpickpod`
 	if test -z "$pod"; then
 		return
 	fi
 
-	container=`k get pod ${pod} -o json | jq '.spec.containers[].name' -r | fzf --select-1`
+	container=`kpickcontainer $pod`
 	if test -z "$container"; then
 		return
 	fi
@@ -23,3 +30,19 @@ kexec() {
 	kubectl -it exec -c "$container" "$pod" -- /bin/bash
 }
 
+klogs() {
+	local pod
+	local container
+
+	pod=`kpickpod`
+	if test -z "$pod"; then
+		return
+	fi
+
+	container=`kpickcontainer $pod`
+	if test -z "$container"; then
+		return
+	fi
+
+	kubectl logs -f -c "$container" "$pod"
+}
