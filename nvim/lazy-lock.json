@@ -1,0 +1,5 @@
+{
+  "github-theme": { "branch": "main", "commit": "c106c9472154d6b2c74b74565616b877ae8ed31d" },
+  "lazy.nvim": { "branch": "main", "commit": "7e6c863bc7563efbdd757a310d17ebc95166cef3" },
+  "nvim-tree": { "branch": "master", "commit": "80523101f0ae48b7f1990e907b685a3d79776c01" }
+}
