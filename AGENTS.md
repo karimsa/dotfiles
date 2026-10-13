@@ -18,3 +18,11 @@
 - Always maintain a 'Tasks' section with TODO items in your planning document, and check things off as you complete them
 - Always maintain a 'Changelog' section in your planning document and keep it up to date
 
+## How to handle review comments
+
+- When creating a PR, continuously watch for review comments until the PR is merged.
+- Triage every comment. If the reported issue does not actually exist, resolve the comment.
+- If the issue exists but predates this PR, open a GitHub issue to track it for later and resolve the comment.
+- If the PR introduced the issue, decide whether it is worth fixing right now. If it is not, resolve the comment.
+- Otherwise, fix the issue, push the fix, and then resolve the comment.
+
