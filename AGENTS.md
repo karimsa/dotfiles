@@ -6,6 +6,7 @@
 - Always use `kubectl` for Kubernetes debugging and diagnostics, not sub-agents or other tools. Check GCP logs and pod events directly.
 - When editing YAML/Helm files, preserve existing key ordering unless explicitly asked to change it. Do not rearrange fields.
 - When fixing bugs, prefer the simplest possible fix. Present the minimal change first before suggesting refactors.
+- When running any dev servers (i.e. yarn dev, yarn start, storybook, etc), always use `oxmgr` - it lives past your agent session, so you must also run `oxmgr list` to see if another agent started the same dev server for you already.
 
 ## Security
 
