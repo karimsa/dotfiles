@@ -15,17 +15,21 @@ Lets assume the path to brainstorms is $BRAINSTORMS - your task is to create a n
 
 The purpose behind a brainstorm is to:
 
- - For me to provide context to you as a braindump or series of braindumps
- - To research existing information around the problems I am investigating and collect this information
- - To have you provide feedback and pushback as a way to stimulate thought
- - To fill out functional requirements, non-functional requirements, and technical implementation details
+- For me to provide context to you as a braindump or series of braindumps
+- To research existing information around the problems I am investigating and collect this information
+- To have you provide feedback and pushback as a way to stimulate thought
+- To fill out functional requirements, non-functional requirements, and technical implementation details
 
 You must ensure that you:
 
- - DO NOT fill in information without my approval.
- - DO NOT fill in more information than what I have provided (if there are gaps in what I am saying, you must clarify them with me).
+- DO NOT fill in information without my approval.
+- DO NOT fill in more information than what I have provided (if there are gaps in what I am saying, you must clarify them with me).
+
+A brainstorm can cover a larger effort than one design. The goal is to plan multiple solution paths in depth, side by side:
+
+- DO NOT ask me to choose between paths, consolidate them, or split the scope into shippable pieces. I do that project management myself afterwards, splitting the brainstorm into design documents with `/tdd`.
+- Keep your open questions focused on details that the paths we are evaluating leave out.
 
 Brainstorms are the parent document to design documents. They are used to think through an area and form a technical opinion on solid grounds.
 
 You should use the [example.md](example.md) file as the source file to copy to start your brainstorm. The sections should be kept verbatim, but you can drop the help text once you understand it.
-
